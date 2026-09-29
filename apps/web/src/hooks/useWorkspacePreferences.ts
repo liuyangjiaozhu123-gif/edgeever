@@ -3,28 +3,26 @@ import {
   DEFAULT_MEMO_LIST_WIDTH_PX,
   clampMemoListWidth,
   readDesktopFocusModePreference,
+  readEditorContentAlignmentPreference,
   readImageCompressionPreference,
   readMemoListWidthPreference,
   readNotebookSidebarCollapsedPreference,
   readShortcutSettingsPreference,
   writeDesktopFocusModePreference,
+  writeEditorContentAlignmentPreference,
   writeImageCompressionPreference,
   writeMemoListWidthPreference,
   writeNotebookSidebarCollapsedPreference,
   writeShortcutSettingsPreference,
   type ShortcutSettings,
+  type EditorContentAlignment,
 } from "@/lib/app-helpers";
-import {
-  readEditorContentWidthPreference,
-  writeEditorContentWidthPreference,
-  type EditorContentWidth,
-} from "@/lib/editor-content-width";
 
 export const useWorkspacePreferences = () => {
   const [imageCompressionEnabled, setImageCompressionEnabled] = useState(readImageCompressionPreference);
   const [desktopFocusMode, setDesktopFocusModeState] = useState(readDesktopFocusModePreference);
   const [notebookSidebarCollapsed, setNotebookSidebarCollapsedState] = useState(readNotebookSidebarCollapsedPreference);
-  const [editorContentWidth, setEditorContentWidthState] = useState(readEditorContentWidthPreference);
+  const [editorContentAlignment, setEditorContentAlignmentState] = useState(readEditorContentAlignmentPreference);
   const [shortcutSettings, setShortcutSettings] = useState<ShortcutSettings>(readShortcutSettingsPreference);
   const [memoListWidth, setMemoListWidthState] = useState(readMemoListWidthPreference);
 
@@ -41,9 +39,9 @@ export const useWorkspacePreferences = () => {
     writeNotebookSidebarCollapsedPreference(collapsed);
   }, []);
 
-  const setEditorContentWidth = useCallback((width: EditorContentWidth) => {
-    setEditorContentWidthState(width);
-    writeEditorContentWidthPreference(width);
+  const setEditorContentAlignment = useCallback((alignment: EditorContentAlignment) => {
+    setEditorContentAlignmentState(alignment);
+    writeEditorContentAlignmentPreference(alignment);
   }, []);
 
   const setMemoListWidth = useCallback((width: number) => {
@@ -58,13 +56,13 @@ export const useWorkspacePreferences = () => {
 
   return {
     desktopFocusMode,
-    editorContentWidth,
+    editorContentAlignment,
     imageCompressionEnabled,
     memoListWidth,
     notebookSidebarCollapsed,
     resetMemoListWidth,
     setDesktopFocusMode,
-    setEditorContentWidth,
+    setEditorContentAlignment,
     setNotebookSidebarCollapsed,
     setImageCompressionEnabled,
     setMemoListWidth,

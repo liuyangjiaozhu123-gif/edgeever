@@ -269,7 +269,7 @@ export const SystemInfoPanel = ({ active = true }: { active?: boolean }) => {
   const [desktopUpdateChecked, setDesktopUpdateChecked] = useState(false);
   const [viewportRevision, setViewportRevision] = useState(0);
   const queryClient = useQueryClient();
-  const { markSeen, release } = useDeployedUpdateNotice();
+  const { release } = useDeployedUpdateNotice();
   const desktopBridge = window.edgeeverDesktop;
   const desktopAvailable = desktopBridge?.isAvailable === true;
   const instanceUrl = desktopAvailable ? getConfiguredDesktopApiBaseUrl() : window.location.origin;
@@ -305,9 +305,6 @@ export const SystemInfoPanel = ({ active = true }: { active?: boolean }) => {
     refetchInterval: (query) => query.state.data?.state === "available" ? 1_000 : false,
     retry: 1,
   });
-  useEffect(() => {
-    if (active) markSeen();
-  }, [active, markSeen]);
   useEffect(() => {
     if (!active) return;
     const onResize = () => setViewportRevision((value) => value + 1);

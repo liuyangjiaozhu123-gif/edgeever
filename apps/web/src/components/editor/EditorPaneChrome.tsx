@@ -21,19 +21,11 @@ import type { ResourceMenuTarget } from "./useEditorResourceActions";
 import { attachmentResourceMenuPosition } from "./attachment-resource-menu";
 import { imageResourceMenuPosition } from "./image-resource-menu-position";
 
-export const IconTooltip = ({
-  label,
-  side = "bottom",
-  children,
-}: {
-  label: string;
-  side?: "top" | "right" | "bottom" | "left";
-  children: ReactNode;
-}) => (
+export const IconTooltip = ({ label, children }: { label: string; children: ReactNode }) => (
   <TooltipProvider delayDuration={0} skipDelayDuration={0}>
     <Tooltip>
       <TooltipTrigger asChild>{children}</TooltipTrigger>
-      <TooltipContent side={side}>{label}</TooltipContent>
+      <TooltipContent side="bottom">{label}</TooltipContent>
     </Tooltip>
   </TooltipProvider>
 );
